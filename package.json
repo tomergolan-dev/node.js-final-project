@@ -1,0 +1,21 @@
+{
+  "name": "serverside",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^17.2.3",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "mongoose": "^9.0.2",
+    "morgan": "~1.9.1",
+    "pino": "^10.1.0",
+    "pino-pretty": "^13.1.3",
+    "pug": "2.0.0-beta11"
+  }
+}
