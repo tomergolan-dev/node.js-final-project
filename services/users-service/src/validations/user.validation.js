@@ -1,9 +1,11 @@
+// Import Zod for request validation
 import { z } from "zod";
 
 /* -----------------------------
    Helpers
 ------------------------------ */
 
+// Validate a required trimmed string (non-empty)
 const requiredString = (fieldName) =>
     z.preprocess(
         (v) => (v === undefined || v === null ? "" : v),
@@ -13,31 +15,33 @@ const requiredString = (fieldName) =>
             .min(1, `${fieldName} is required`)
     );
 
+// Validate a required positive integer (accepts numbers and numeric strings)
 const requiredPositiveInt = (fieldName) =>
     z
         .any()
-        // 1) Missing
-        .refine((v) => v !== undefined && v !== null && v !== "", `${fieldName} is required`)
-        // 2) Convert to number (without Zod coercion that creates NaN confusion)
-        .transform((v) => Number(v))
-        // 3) Must be a real number
+        .refine((v) => v !== undefined && v !== null && String(v).trim() !== "", `${fieldName} is required`)
+        .transform((v) => Number(String(v).trim()))
         .refine((n) => Number.isFinite(n), `${fieldName} must be a number`)
-        // 4) Must be integer
         .refine((n) => Number.isInteger(n), `${fieldName} must be an integer`)
-        // 5) Must be positive
         .refine((n) => n > 0, `${fieldName} must be a positive integer`);
 
+// Validate a required date in YYYY-MM-DD format and convert to a Date object (UTC)
 const requiredIsoDate = (fieldName) =>
     z
-        .any()
-        // Missing
-        .refine((v) => v !== undefined && v !== null && v !== "", `${fieldName} is required`)
-        // Must be string
-        .refine((v) => typeof v === "string", `${fieldName} must be a valid date`)
-        // Must match YYYY-MM-DD exactly
-        .refine((s) => /^\d{4}-\d{2}-\d{2}$/.test(s), `${fieldName} must be a valid date`)
-        // Must be a real calendar date (e.g., not 2025-02-30)
-        .transform((s) => {
+        .string({ invalid_type_error: `${fieldName} must be a valid date` })
+        .trim()
+        .min(1, `${fieldName} is required`)
+        .superRefine((s, ctx) => {
+            // Enforce YYYY-MM-DD format
+            if (!/^\d{4}-\d{2}-\d{2}$/.test(s)) {
+                ctx.addIssue({
+                    code: z.ZodIssueCode.custom,
+                    message: `${fieldName} must be a valid date`
+                });
+                return;
+            }
+
+            // Validate that the date exists in the calendar
             const [y, m, d] = s.split("-").map(Number);
             const dt = new Date(Date.UTC(y, m - 1, d));
             const ok =
@@ -45,18 +49,23 @@ const requiredIsoDate = (fieldName) =>
                 dt.getUTCMonth() === m - 1 &&
                 dt.getUTCDate() === d;
 
-            if (!ok) throw new Error("INVALID_DATE");
-            return new Date(s); // store as Date
+            if (!ok) {
+                ctx.addIssue({
+                    code: z.ZodIssueCode.custom,
+                    message: `${fieldName} must be a valid date`
+                });
+            }
         })
-        .catch(() => {
-            // If transform threw, force a Zod-style error message
-            throw new Error(`${fieldName} must be a valid date`);
+        .transform((s) => {
+            const [y, m, d] = s.split("-").map(Number);
+            return new Date(Date.UTC(y, m - 1, d));
         });
 
 /* -----------------------------
    Schemas
 ------------------------------ */
 
+// Validate POST /api/add payload for adding a user
 export const addUserSchema = z.object({
     id: requiredPositiveInt("id"),
     first_name: requiredString("first_name"),
@@ -64,6 +73,7 @@ export const addUserSchema = z.object({
     birthday: requiredIsoDate("birthday"),
 });
 
+// Validate /api/users/:id route parameter
 export const userIdParamSchema = z.object({
     id: requiredPositiveInt("id"),
 });
