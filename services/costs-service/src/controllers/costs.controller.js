@@ -4,6 +4,9 @@ import { addCostSchema, reportQuerySchema } from "../validations/cost.validation
 // Import service functions for cost operations
 import { addCost, getMonthlyReport } from "../services/costs.service.js";
 
+// Import logger utility for endpoint access logging
+import { saveLog } from "../utils/logger.js";
+
 /*
  Send a consistent validation error response.
  This function formats Zod validation issues into a single message
@@ -24,6 +27,9 @@ function sendValidationError(res, parsed) {
 
 // Handle POST /api/add for adding a cost item
 export async function addCostItem(req, res, next) {
+    // Log endpoint access as required by project specification
+    await saveLog("info", "Endpoint accessed", { endpoint: "POST /api/add" });
+
     // Validate the request body using the Zod schema
     const parsed = addCostSchema.safeParse(req.body);
 
@@ -53,6 +59,9 @@ export async function addCostItem(req, res, next) {
 
 // Handle GET /api/report for retrieving a monthly report
 export async function getReport(req, res, next) {
+    // Log endpoint access as required by project specification
+    await saveLog("info", "Endpoint accessed", { endpoint: "GET /api/report" });
+
     // Validate query parameters using the Zod schema
     const parsed = reportQuerySchema.safeParse(req.query);
 

@@ -7,11 +7,18 @@ import costsRoutes from "./routes/costs.routes.js";
 // Import the central error handler (returns JSON errors)
 import { errorHandler } from "./middlewares/errorHandler.js";
 
+// Import request logging middleware (logs every incoming HTTP request)
+import { requestLogger } from "./middlewares/request-logger.js";
+
 // Create the Express application instance
 const app = express();
 
 // Parse JSON request bodies (req.body)
 app.use(express.json());
+
+// Log every HTTP request received by this service
+// This fulfills the project requirement to log all incoming requests
+app.use(requestLogger);
 
 // Mount API routes under /api
 app.use("/api", costsRoutes);

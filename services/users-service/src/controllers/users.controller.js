@@ -4,6 +4,9 @@ import { addUserSchema, userIdParamSchema } from "../validations/user.validation
 // Import service functions for user operations
 import { createUser, getUserDetailsWithTotal, listUsers } from "../services/users.service.js";
 
+// Import logger utility for endpoint access logging
+import { saveLog } from "../utils/logger.js";
+
 /*
  Send a consistent validation error response.
  This function formats Zod validation issues into a single message
@@ -24,6 +27,9 @@ function sendValidationError(res, parsed) {
 
 // Handle GET /api/users (list all users)
 export async function getAllUsers(req, res, next) {
+    // Log endpoint access as required by project specification
+    await saveLog("info", "Endpoint accessed", { endpoint: "GET /api/users" });
+
     try {
         // Fetch all users from the service layer
         const users = await listUsers();
@@ -38,6 +44,9 @@ export async function getAllUsers(req, res, next) {
 
 // Handle POST /api/add when the payload represents a user
 export async function addUser(req, res, next) {
+    // Log endpoint access as required by project specification
+    await saveLog("info", "Endpoint accessed", { endpoint: "POST /api/add" });
+
     // Validate the request body using the Zod schema
     const parsed = addUserSchema.safeParse(req.body);
 
@@ -60,6 +69,9 @@ export async function addUser(req, res, next) {
 
 // Handle GET /api/users/:id (user details + total costs)
 export async function getUserDetails(req, res, next) {
+    // Log endpoint access as required by project specification
+    await saveLog("info", "Endpoint accessed", { endpoint: "GET /api/users/:id" });
+
     // Validate route params using the Zod schema
     const parsed = userIdParamSchema.safeParse(req.params);
 

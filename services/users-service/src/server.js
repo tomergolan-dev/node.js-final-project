@@ -8,7 +8,7 @@ import app from "./app.js";
 import { connectMongo } from "./config/db.js";
 
 // Define the port on which the service will listen
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3002;
 
 // Start the server and initialize required resources
 async function start() {

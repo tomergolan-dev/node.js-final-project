@@ -33,8 +33,11 @@ const costSchema = new mongoose.Schema(
         }
     },
     {
-        // Automatically add createdAt and updatedAt timestamps
-        timestamps: true
+        // Store only the creation timestamp (no updatedAt field)
+        timestamps: { createdAt: true, updatedAt: false },
+
+        // Disable the internal MongoDB version key (__v)
+        versionKey: false
     }
 );
 
