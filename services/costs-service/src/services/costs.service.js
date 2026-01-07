@@ -171,10 +171,10 @@ export async function getMonthlyReport(userid, year, month) {
     if (shouldCache) {
         const cached = await Report.findOne({ userid, year, month }, { _id: 0 }).lean();
         if (cached) {
-            await saveLog("info", "Report returned from cache", { endpoint: "GET /api/report" });
+            // Log cache hit (best-effort) without breaking the report response
+            saveLog("info", "Report returned from cache", { endpoint: "GET /api/report" }).catch(() => {});
             return cached;
         }
-
     }
 
     // Create the month date range [start, end)
