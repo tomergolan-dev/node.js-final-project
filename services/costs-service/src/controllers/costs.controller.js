@@ -72,7 +72,7 @@ export async function getReport(req, res, next) {
 
     try {
         // Convert validated query parameters into the required types
-        const userid = parsed.data.userid;
+        const userid = parsed.data.id;
         const year = parsed.data.year;
         const month = parsed.data.month;
 

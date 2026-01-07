@@ -7,6 +7,9 @@ import User from "../models/user.model.js";
 // Import the Report model for computed (cached) monthly reports
 import Report from "../models/report.model.js";
 
+// Import logger utility for endpoint access logging
+import { saveLog } from "../utils/logger.js";
+
 /*
  Create a standardized application error.
  The global error handler converts this error into a JSON response
@@ -168,10 +171,10 @@ export async function getMonthlyReport(userid, year, month) {
     if (shouldCache) {
         const cached = await Report.findOne({ userid, year, month }, { _id: 0 }).lean();
         if (cached) {
-            // Debug log: indicates that the report result was returned from cache
-            console.log("return from cache:", cached);
+            await saveLog("info", "Report returned from cache", { endpoint: "GET /api/report" });
             return cached;
         }
+
     }
 
     // Create the month date range [start, end)

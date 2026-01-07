@@ -131,7 +131,7 @@ export const addCostSchema = z.object({
 
 // Validate GET /api/report query parameters
 export const reportQuerySchema = z.object({
-    userid: requiredPositiveInt("userid"),
+    id: requiredPositiveInt("id"),
     year: requiredPositiveInt("year"),
     month: requiredPositiveInt("month")
         .refine((m) => m >= 1 && m <= 12, "month must be between 1 and 12"),
