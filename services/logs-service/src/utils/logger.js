@@ -1,7 +1,7 @@
 import pino from "pino";
 import Log from "../models/log.model.js";
 
-const SERVICE_NAME = process.env.SERVICE_NAME || "users-service";
+const SERVICE_NAME = process.env.SERVICE_NAME || "logs-service";
 
 // Create a Pino logger instance (used to generate log messages)
 export const logger = pino({
