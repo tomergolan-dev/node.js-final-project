@@ -6,10 +6,10 @@ import { saveLog } from "../utils/logger.js";
 
 // Handle GET /api/logs (list all logs)
 export async function getAllLogs(req, res, next) {
-    // Log endpoint access as required by project specification
-    await saveLog("info", "Endpoint accessed", { endpoint: "GET /api/logs" });
-
     try {
+        // Log endpoint access as required by project specification
+        await saveLog("info", "Endpoint accessed", { endpoint: "GET /api/logs" });
+
         // Fetch all logs from the service layer
         const logs = await listLogs();
 

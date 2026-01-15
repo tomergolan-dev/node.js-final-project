@@ -6,10 +6,10 @@ import { saveLog } from "../utils/logger.js";
 
 // Handle GET /api/about (developers team)
 export async function getAbout(req, res, next) {
-    // Log endpoint access as required by project specification
-    await saveLog("info", "Endpoint accessed", { endpoint: "GET /api/about" });
-
     try {
+        // Log endpoint access as required by project specification
+        await saveLog("info", "Endpoint accessed", { endpoint: "GET /api/about" });
+
         // Fetch the developers team list from the service layer
         const team = getDevelopersTeam();
 

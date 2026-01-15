@@ -27,7 +27,8 @@ function sendValidationError(res, parsed) {
 
 // Handle POST /api/add for adding a cost item
 export async function addCostItem(req, res, next) {
-    // Log endpoint access as required by project specification
+    try {
+        // Log endpoint access as required by project specification
     await saveLog("info", "Endpoint accessed", { endpoint: "POST /api/add" });
 
     // Validate the request body using the Zod schema
@@ -38,7 +39,6 @@ export async function addCostItem(req, res, next) {
         return sendValidationError(res, parsed);
     }
 
-    try {
         // Create the cost item using the validated payload
         const cost = await addCost(parsed.data);
 
@@ -59,7 +59,8 @@ export async function addCostItem(req, res, next) {
 
 // Handle GET /api/report for retrieving a monthly report
 export async function getReport(req, res, next) {
-    // Log endpoint access as required by project specification
+    try {
+        // Log endpoint access as required by project specification
     await saveLog("info", "Endpoint accessed", { endpoint: "GET /api/report" });
 
     // Validate query parameters using the Zod schema
@@ -70,7 +71,6 @@ export async function getReport(req, res, next) {
         return sendValidationError(res, parsed);
     }
 
-    try {
         // Convert validated query parameters into the required types
         const userid = parsed.data.id;
         const year = parsed.data.year;
