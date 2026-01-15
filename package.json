@@ -1,0 +1,40 @@
+{
+  "name": "node.js-final-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "start": "npm run start:all",
+
+    "start:logs": "npm --prefix services/logs-service start",
+    "start:users": "npm --prefix services/users-service start",
+    "start:costs": "npm --prefix services/costs-service start",
+    "start:admin": "npm --prefix services/admin-service start",
+
+    "start:all": "concurrently -n LOGS,USERS,COSTS,ADMIN -c blue,green,yellow,magenta \"npm run start:logs\" \"npm run start:users\" \"npm run start:costs\" \"npm run start:admin\"",
+
+    "test": "jest --runInBand"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomergolan-dev/node.js-final-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/tomergolan-dev/node.js-final-project/issues"
+  },
+  "homepage": "https://github.com/tomergolan-dev/node.js-final-project#readme",
+  "dependencies": {
+    "axios": "^1.13.2"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "jest": "^30.2.0"
+  }
+}
