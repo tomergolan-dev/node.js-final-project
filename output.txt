@@ -1,33 +1,33 @@
-a=https://logs-service-28ig.onrender.com
-b=https://users-service-k5i5.onrender.com
-c=https://costs-service-gl1b.onrender.com
-d=https://admin-service-97em.onrender.com
+a=https://logs-service-qa7i.onrender.com
+b=https://users-service-tiv3.onrender.com
+c=https://costs-service-nyve.onrender.com
+d=https://admin-service-7rrv.onrender.com
 
 testing getting the about
 -------------------------
-url=https://admin-service-97em.onrender.com/api/about/
+url=https://admin-service-7rrv.onrender.com/api/about/
 data.status_code=200
-data.content=b'[{"first_name":"Matan","last_name":"Kar Mazin"},{"first_name":"Eric","last_name":"Rosenberg"}]'
-data.text=[{"first_name":"Matan","last_name":"Kar Mazin"},{"first_name":"Eric","last_name":"Rosenberg"}]
-data.json()=[{'first_name': 'Matan', 'last_name': 'Kar Mazin'}, {'first_name': 'Eric', 'last_name': 'Rosenberg'}]
+data.content=b'[{"first_name":"Chen","last_name":"Tetroashvili"},{"first_name":"Itay David","last_name":"Zana"},{"first_name":"Tomer","last_name":"Golan"}]'
+data.text=[{"first_name":"Chen","last_name":"Tetroashvili"},{"first_name":"Itay David","last_name":"Zana"},{"first_name":"Tomer","last_name":"Golan"}]
+data.json()=[{'first_name': 'Chen', 'last_name': 'Tetroashvili'}, {'first_name': 'Itay David', 'last_name': 'Zana'}, {'first_name': 'Tomer', 'last_name': 'Golan'}]
 
 testing getting the report - 1
 ------------------------------
-url=https://costs-service-gl1b.onrender.com/api/report/?id=123123&year=2026&month=1
+url=https://costs-service-nyve.onrender.com/api/report/?id=123123&year=2026&month=1
 data.status_code=200
-data.content=b'{"userid":123123,"year":2026,"month":1,"costs":[{"food":[{"sum":8,"description":"milk 9","day":13}]},{"health":[]},{"housing":[]},{"sports":[]},{"education":[]}]}'
-data.text={"userid":123123,"year":2026,"month":1,"costs":[{"food":[{"sum":8,"description":"milk 9","day":13}]},{"health":[]},{"housing":[]},{"sports":[]},{"education":[]}]}
+data.content=b'{"userid":123123,"year":2026,"month":1,"costs":[{"food":[]},{"education":[]},{"health":[]},{"housing":[]},{"sports":[]}]}'
+data.text={"userid":123123,"year":2026,"month":1,"costs":[{"food":[]},{"education":[]},{"health":[]},{"housing":[]},{"sports":[]}]}
 
 testing adding cost item
 ----------------------------------
-url=https://costs-service-gl1b.onrender.com/api/add/
+url=https://costs-service-nyve.onrender.com/api/add/
 data.status_code=201
-data.content=b'{"userid":123123,"description":"milk 9","category":"food","sum":8,"created_at":"2026-01-15T19:29:57.371Z"}'
-data.text={"userid":123123,"description":"milk 9","category":"food","sum":8,"created_at":"2026-01-15T19:29:57.371Z"}
+data.content=b'{"description":"milk 9","category":"food","userid":123123,"sum":8,"createdAt":"2026-01-17T14:42:13.867Z"}'
+data.text={"description":"milk 9","category":"food","userid":123123,"sum":8,"createdAt":"2026-01-17T14:42:13.867Z"}
 
 testing getting the report - 2
 ------------------------------
-url=https://costs-service-gl1b.onrender.com/api/report/?id=123123&year=2026&month=1
+url=https://costs-service-nyve.onrender.com/api/report/?id=123123&year=2026&month=1
 data.status_code=200
-data.content=b'{"userid":123123,"year":2026,"month":1,"costs":[{"food":[{"sum":8,"description":"milk 9","day":13},{"sum":8,"description":"milk 9","day":15}]},{"health":[]},{"housing":[]},{"sports":[]},{"education":[]}]}'
-data.text={"userid":123123,"year":2026,"month":1,"costs":[{"food":[{"sum":8,"description":"milk 9","day":13},{"sum":8,"description":"milk 9","day":15}]},{"health":[]},{"housing":[]},{"sports":[]},{"education":[]}]}
+data.content=b'{"userid":123123,"year":2026,"month":1,"costs":[{"food":[{"sum":8,"description":"milk 9","day":17}]},{"education":[]},{"health":[]},{"housing":[]},{"sports":[]}]}'
+data.text={"userid":123123,"year":2026,"month":1,"costs":[{"food":[{"sum":8,"description":"milk 9","day":17}]},{"education":[]},{"health":[]},{"housing":[]},{"sports":[]}]}

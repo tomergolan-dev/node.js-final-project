@@ -8,10 +8,10 @@ filename = input("filename=")
 # The third will handle all cost-related tasks. (c)
 # The fourth will handle any admin-related tasks (e.g. developers details) (d)
 
-a = "https://logs-service-28ig.onrender.com"
-b = "https://users-service-k5i5.onrender.com"
-c = "https://costs-service-gl1b.onrender.com"
-d = "https://admin-service-97em.onrender.com"
+a = "https://logs-service-qa7i.onrender.com"
+b = "https://users-service-tiv3.onrender.com"
+c = "https://costs-service-nyve.onrender.com"
+d = "https://admin-service-7rrv.onrender.com"
 
 # Redirect all prints to a file
 output = open(filename, "w", encoding="utf-8")
