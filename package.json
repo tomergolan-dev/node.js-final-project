@@ -8,13 +8,18 @@
   },
   "scripts": {
     "start": "npm run start:all",
-
     "start:logs": "npm --prefix services/logs-service start",
     "start:users": "npm --prefix services/users-service start",
     "start:costs": "npm --prefix services/costs-service start",
     "start:admin": "npm --prefix services/admin-service start",
-
     "start:all": "concurrently -n LOGS,USERS,COSTS,ADMIN -c blue,green,yellow,magenta \"npm run start:logs\" \"npm run start:users\" \"npm run start:costs\" \"npm run start:admin\"",
+
+    "install:logs": "npm --prefix services/logs-service install",
+    "install:users": "npm --prefix services/users-service install",
+    "install:costs": "npm --prefix services/costs-service install",
+    "install:admin": "npm --prefix services/admin-service install",
+
+    "install:all": "npm install && npm run install:logs && npm run install:users && npm run install:costs && npm run install:admin",
 
     "test": "jest --runInBand"
   },
