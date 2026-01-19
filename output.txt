@@ -22,12 +22,12 @@ testing adding cost item
 ----------------------------------
 url=https://costs-service-nyve.onrender.com/api/add/
 data.status_code=201
-data.content=b'{"description":"milk 9","category":"food","userid":123123,"sum":8,"createdAt":"2026-01-17T14:42:13.867Z"}'
-data.text={"description":"milk 9","category":"food","userid":123123,"sum":8,"createdAt":"2026-01-17T14:42:13.867Z"}
+data.content=b'{"description":"milk 9","category":"food","userid":123123,"sum":8,"createdAt":"2026-01-19T14:36:20.873Z"}'
+data.text={"description":"milk 9","category":"food","userid":123123,"sum":8,"createdAt":"2026-01-19T14:36:20.873Z"}
 
 testing getting the report - 2
 ------------------------------
 url=https://costs-service-nyve.onrender.com/api/report/?id=123123&year=2026&month=1
 data.status_code=200
-data.content=b'{"userid":123123,"year":2026,"month":1,"costs":[{"food":[{"sum":8,"description":"milk 9","day":17}]},{"education":[]},{"health":[]},{"housing":[]},{"sports":[]}]}'
-data.text={"userid":123123,"year":2026,"month":1,"costs":[{"food":[{"sum":8,"description":"milk 9","day":17}]},{"education":[]},{"health":[]},{"housing":[]},{"sports":[]}]}
+data.content=b'{"userid":123123,"year":2026,"month":1,"costs":[{"food":[{"sum":8,"description":"milk 9","day":19}]},{"education":[]},{"health":[]},{"housing":[]},{"sports":[]}]}'
+data.text={"userid":123123,"year":2026,"month":1,"costs":[{"food":[{"sum":8,"description":"milk 9","day":19}]},{"education":[]},{"health":[]},{"housing":[]},{"sports":[]}]}

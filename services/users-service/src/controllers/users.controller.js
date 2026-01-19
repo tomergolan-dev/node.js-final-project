@@ -46,15 +46,15 @@ export async function getAllUsers(req, res, next) {
 export async function addUser(req, res, next) {
     try {
         // Log endpoint access as required by project specification
-    await saveLog("info", "Endpoint accessed", { endpoint: "POST /api/add" });
+        await saveLog("info", "Endpoint accessed", { endpoint: "POST /api/add" });
 
-    // Validate the request body using the Zod schema
-    const parsed = addUserSchema.safeParse(req.body);
+        // Validate the request body using the Zod schema
+        const parsed = addUserSchema.safeParse(req.body);
 
-    // Return validation error response on invalid input
-    if (!parsed.success) {
-        return sendValidationError(res, parsed);
-    }
+        // Return validation error response on invalid input
+        if (!parsed.success) {
+            return sendValidationError(res, parsed);
+        }
 
         // Create the user using the validated payload
         const user = await createUser(parsed.data);
@@ -71,15 +71,15 @@ export async function addUser(req, res, next) {
 export async function getUserDetails(req, res, next) {
     try {
         // Log endpoint access as required by project specification
-    await saveLog("info", "Endpoint accessed", { endpoint: "GET /api/users/:id" });
+        await saveLog("info", "Endpoint accessed", { endpoint: "GET /api/users/:id" });
 
-    // Validate route params using the Zod schema
-    const parsed = userIdParamSchema.safeParse(req.params);
+        // Validate route params using the Zod schema
+        const parsed = userIdParamSchema.safeParse(req.params);
 
-    // Return validation error response on invalid input
-    if (!parsed.success) {
-        return sendValidationError(res, parsed);
-    }
+        // Return validation error response on invalid input
+        if (!parsed.success) {
+            return sendValidationError(res, parsed);
+        }
 
         // Fetch user details and computed total costs
         const data = await getUserDetailsWithTotal(parsed.data.id);

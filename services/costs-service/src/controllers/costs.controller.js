@@ -29,15 +29,15 @@ function sendValidationError(res, parsed) {
 export async function addCostItem(req, res, next) {
     try {
         // Log endpoint access as required by project specification
-    await saveLog("info", "Endpoint accessed", { endpoint: "POST /api/add" });
+        await saveLog("info", "Endpoint accessed", { endpoint: "POST /api/add" });
 
-    // Validate the request body using the Zod schema
-    const parsed = addCostSchema.safeParse(req.body);
+        // Validate the request body using the Zod schema
+        const parsed = addCostSchema.safeParse(req.body);
 
-    // Return validation error response on invalid input
-    if (!parsed.success) {
-        return sendValidationError(res, parsed);
-    }
+        // Return validation error response on invalid input
+        if (!parsed.success) {
+            return sendValidationError(res, parsed);
+        }
 
         // Create the cost item using the validated payload
         const cost = await addCost(parsed.data);
@@ -61,15 +61,15 @@ export async function addCostItem(req, res, next) {
 export async function getReport(req, res, next) {
     try {
         // Log endpoint access as required by project specification
-    await saveLog("info", "Endpoint accessed", { endpoint: "GET /api/report" });
+        await saveLog("info", "Endpoint accessed", { endpoint: "GET /api/report" });
 
-    // Validate query parameters using the Zod schema
-    const parsed = reportQuerySchema.safeParse(req.query);
+        // Validate query parameters using the Zod schema
+        const parsed = reportQuerySchema.safeParse(req.query);
 
-    // Return validation error response on invalid input
-    if (!parsed.success) {
-        return sendValidationError(res, parsed);
-    }
+        // Return validation error response on invalid input
+        if (!parsed.success) {
+            return sendValidationError(res, parsed);
+        }
 
         // Convert validated query parameters into the required types
         const userid = parsed.data.id;
